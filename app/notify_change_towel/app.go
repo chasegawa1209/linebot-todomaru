@@ -23,4 +23,5 @@ func main() {
     i := interactor.NewInteractor(logger, LINE_ACCESS_TOKEN, LINE_SECRET, LINE_ROOM_ID)
     http.HandleFunc("/", i.NewNotifyChangeTowelHandler().Handler)
     http.HandleFunc("/callback", i.NewNotifyChangeTowelHandler().LineHandler)
+    http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), nil)
 }

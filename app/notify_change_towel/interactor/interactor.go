@@ -30,6 +30,7 @@ func NewInteractor(logger *zap.Logger, lineAccessToken string, lineSecret string
 // NewNotifyChangeTowelHandler ハンドラー
 func (i *Interactor) NewNotifyChangeTowelHandler() handler.NotifyChangeTowelHandlerInterface {
     return handler.NewNotifyChangeTowelHandler(
+        i.logger,
         i.NewNotifyChangeTowelUsecase(),
     )
 }
