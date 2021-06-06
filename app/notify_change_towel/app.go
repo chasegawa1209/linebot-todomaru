@@ -1,6 +1,7 @@
 package main
 
 import (
+	"net/http"
 	"fmt"
 	"os"
 
@@ -20,10 +21,6 @@ func main() {
     logger := logging.NewZapLogger(isDebug)
 
     i := interactor.NewInteractor(logger, LINE_ACCESS_TOKEN, LINE_SECRET, LINE_ROOM_ID)
-    result := i.NewNotifyChangeTowelUsecase().Exec()
-    logger.Sugar().Infof("ProcessingTime: %f[s]", result.ProcessingTime)
-    if result.Err != nil {
-        logger.Sugar().Fatal("failed to NotifyChangeTowelBatch: %s", result.Err.Error())
-    }
-    logger.Sugar().Infof("success to NotifyChangeTowelBatch")
+    http.HandleFunc("/", i.NewNotifyChangeTowelHandler().Handler)
+    http.HandleFunc("/callback", i.NewNotifyChangeTowelHandler().LineHandler)
 }
