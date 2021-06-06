@@ -1,0 +1,16 @@
+debug:
+  isDebug: true
+
+lineMessagingApi:
+  accessToken: ""
+  pushURL: ""
+  replyURL: ""
+  adminID: ""
+  groupID: ""
+
+schedule:
+  towel: ""
+
+calendarID:
+  chisakiID: ""
+  kensukeID: ""
