@@ -14,14 +14,15 @@ func main() {
     LINE_SECRET := os.Getenv("LINE_SECRET")
     LINE_ROOM_ID := os.Getenv("LINE_ROOM_ID")
 
-    fmt.Println("Hello, world")
-
     // logger
     isDebug := true
     logger := logging.NewZapLogger(isDebug)
 
     i := interactor.NewInteractor(logger, LINE_ACCESS_TOKEN, LINE_SECRET, LINE_ROOM_ID)
+
+    port := os.Getenv("PORT")
+    logger.Debug(fmt.Sprintf("Starting server at Port %s", port))
     http.HandleFunc("/", i.NewNotifyChangeTowelHandler().Handler)
     http.HandleFunc("/callback", i.NewNotifyChangeTowelHandler().LineHandler)
-    http.ListenAndServe(fmt.Sprintf(":%s", os.Getenv("PORT")), nil)
+    http.ListenAndServe(fmt.Sprintf(":%s", port), nil)
 }
