@@ -29,6 +29,7 @@ func NewNotifyChangeTowelHandler(logger *zap.Logger, usecase usecase.NotifyChang
 
 func (h *NotifyChangeTowelHandler) Handler(w http.ResponseWriter, r *http.Request) {
     fmt.Fprintf(w, "Hello world!\n")
+    w.WriteHeader(http.StatusOK)
 }
 
 func (h *NotifyChangeTowelHandler) LineHandler(w http.ResponseWriter, r *http.Request) {
@@ -38,4 +39,5 @@ func (h *NotifyChangeTowelHandler) LineHandler(w http.ResponseWriter, r *http.Re
         h.logger.Sugar().Fatal("failed to NotifyChangeTowelBatch: %s", result.Err.Error())
     }
     h.logger.Sugar().Infof("success to NotifyChangeTowelBatch")
+    w.WriteHeader(http.StatusOK)
 }
