@@ -1,7 +1,6 @@
 package interactor
 
 import (
-	"github.com/chasegawa1209/linebot-todomaru/lib/handler"
 	"github.com/chasegawa1209/linebot-todomaru/lib/domain/repository"
 	"github.com/chasegawa1209/linebot-todomaru/lib/infra/linestore"
 	"github.com/chasegawa1209/linebot-todomaru/lib/usecase"
@@ -25,14 +24,6 @@ func NewInteractor(logger *zap.Logger, lineAccessToken string, lineSecret string
         lineSecret:      lineSecret,
         lineRoomID:      lineRoomID,
     }
-}
-
-// NewNotifyChangeTowelHandler ハンドラー
-func (i *Interactor) NewNotifyChangeTowelHandler() handler.NotifyChangeTowelHandlerInterface {
-    return handler.NewNotifyChangeTowelHandler(
-        i.logger,
-        i.NewNotifyChangeTowelUsecase(),
-    )
 }
 
 // NewNotifyChangeTowelUsecase ユースケース

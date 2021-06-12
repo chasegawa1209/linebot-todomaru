@@ -36,13 +36,15 @@ func (u *NotifyChangeTowelUsecase) Exec() *NotifyChangeTowelUsecaseResult {
         result.ProcessingTime = time.Since(now).Seconds()
     }()
 
-    // メッセージ作成
-    msg := createMessage()
+    if now.Weekday() == time.Saturday {
+        // メッセージ作成
+        msg := createMessage()
 
-    // LineBotで送信
-    if err := u.repository.PostMessage(msg); err != nil {
-        result.Err = err
-        return result
+        // LineBotで送信
+        if err := u.repository.PostMessage(msg); err != nil {
+            result.Err = err
+            return result
+        }
     }
 
     return result
